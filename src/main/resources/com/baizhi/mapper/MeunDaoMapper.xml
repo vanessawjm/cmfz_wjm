@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.MeunDao">
+	<resultMap type="com.baizhi.entity.Meun" id="rm">
+		<id column="id1" property="id"/>
+		<result column="title1" property="title"/>
+		<result column="href1" property="href"/>
+		<result column="iconCls1" property="iconCls"/>
+		<collection property="secondMeun" ofType="com.baizhi.entity.Meun">
+			<id column="id2" property="id"/>
+			<result column="title2" property="title"/>
+			<result column="href2" property="href"/>
+			<result column="iconCls2" property="iconCls"/>
+		</collection>
+	</resultMap>
+	<select id="queryMeuns" resultMap="rm">
+		
+		select m1.id id1,m1.title title1,m1.href href1,m1.iconCls iconCls1,m2.id id2,m2.title title2,m2.href href2,m2.iconCls iconCls2
+		from meun m1 left join meun m2 on m2.parentId=m1.id where m1.parentId='0'
+		
+		
+	</select>
+ 	
+  
+</mapper>
+
+
+
+
+
+

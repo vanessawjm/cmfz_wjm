@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.AdminDao">
+	
+  	<select id="queryAdminByAdminName" resultType="com.baizhi.entity.Admin">
+  		SELECT id,adminName,`password` FROM `admin` where adminName=#{adminName}
+  	</select>
+  	
+  	<!-- 添加 -->
+  	<insert id="insertItem">
+  		insert into `admin`(id,adminName,`password`) value(#{id},#{adminName},#{password})
+  	</insert>
+  	
+  	
+  	<update id="updateItem">
+  		insert into `admin`(id,adminName,`password`) value(#{id},#{adminName},#{password})
+  	
+  	</update>
+</mapper>
+
+
+
+
+
+

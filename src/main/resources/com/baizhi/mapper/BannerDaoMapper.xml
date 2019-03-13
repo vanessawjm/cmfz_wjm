@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.BannerDao">
+	<!-- 查询所有的轮播图 -->
+	<select id="queryAll" resultType="com.baizhi.entity.Banner">
+		SELECT id,title,img_path imgPath,`desc`,`status`,createTime FROM banner limit #{begin},#{rows}
+	</select>
+	
+	<!-- 查询信息总条数 -->
+	<select id="queryCount" resultType="java.lang.Integer">
+		select count(*) from banner
+	</select>
+	
+	<!-- 根据id删除一张轮播图 -->
+	<delete id="removeItem">
+		delete from banner where id = #{id}
+	</delete>
+	
+	<!-- 添加一个轮播图 -->
+	<insert id="insertItem">
+		insert into banner(id,title,img_path,`desc`,`status`,createTime) 
+		value(#{id},#{title},#{imgPath},#{desc},#{status},SYSDATE())
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateItem">
+		update banner set `status`=#{status} where id=#{id}
+	</update>
+	
+	<select id="selectAll" resultType="com.baizhi.entity.Banner">
+		SELECT id,title,img_path imgPath,`desc`,`status`,createTime FROM banner where `status`=1
+	</select>
+  
+</mapper>
+
+
+
+
+
+

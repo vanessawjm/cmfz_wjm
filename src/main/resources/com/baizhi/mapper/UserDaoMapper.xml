@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.UserDao">
+	<select id="queryAll" resultType="com.baizhi.entity.User">
+		select id,photo,username,realname,sex,privoince,city,sign,phone,`password`,salt,createTime,`status`
+		from `user`
+		limit #{begin},#{rows}
+	</select>
+ 	
+ 	<select id="queryCount" resultType="java.lang.Integer">
+		select count(*) from `user`
+ 	</select>
+ 	
+ 	<select id="selectAll" resultType="com.baizhi.entity.User">
+ 		select id,photo,username,realname,sex,privoince,city,sign,phone,`password`,salt,createTime,`status`
+		from `user`
+ 	</select>
+ 	
+ 	
+ 	
+ 	<!-- 查询 -->
+ 	<select id="queryCountByMaleOrFemale" resultType="Integer">
+		select count(*) from `user` WHERE MONTH (createTime)=#{months} and sex = #{sex}
+ 	</select>
+ 	
+ 	
+ 	<!-- 地图查询 -->
+ 	<select id="queryAddressByFemale" resultType="com.baizhi.entity.UserVo">
+ 		select count(*) value,privoince name from `user` where sex = '女' GROUP BY privoince,sex
+ 	</select>
+ 	
+ 	<!-- 地图查询 -->
+ 	<select id="queryAddressByMale" resultType="com.baizhi.entity.UserVo">
+ 		select count(*) value,privoince name from `user` where sex = '男' GROUP BY privoince,sex
+ 	</select>
+ 	
+ 	<!-- 添加 -->
+ 	<insert id="insertItem">
+ 		INSERT INTO `user`(id,photo,username,realname,sex,privoince,city,sign,phone,`password`,salt,createTime,`status`) 
+ 		VALUES (#{id}, #{photo}, #{username}, #{realname}, #{sex}, #{privoince}, #{city}, #{sign}, #{phone}, #{password}, #{salt}, SYSDATE(), '1')
+ 	</insert>
+ 	
+ 	<select id="queryItem" resultType="com.baizhi.entity.User">
+ 		select id,photo,username,realname,sex,privoince,city,sign,phone,`password`,salt,createTime,`status`
+		from `user` where username=#{id}
+ 	</select>
+ 	
+  
+</mapper>
+
+
+
+
+
+
